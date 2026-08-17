@@ -1,0 +1,63 @@
+{
+    "milestone": "Milestone 2",
+    "step": "Step 2 - XGBoost",
+    "model": "XGBoost",
+    "dataset": {
+        "train_samples": 11550,
+        "validation_samples": 2464,
+        "test_samples": 2486
+    },
+    "number_of_classes": 22,
+    "classes": [
+        "AI Researcher",
+        "Backend Developer",
+        "Business Analyst",
+        "Business Manager",
+        "Cybersecurity Analyst",
+        "Data Analyst",
+        "Data Scientist",
+        "Deep Learning Engineer",
+        "Digital Marketing Specialist",
+        "Ethical Hacker",
+        "Frontend Developer",
+        "Full Stack Developer",
+        "Graphic Designer",
+        "Machine Learning Engineer",
+        "Marketing Executive",
+        "Operations Manager",
+        "Product Designer",
+        "Project Manager",
+        "Security Engineer",
+        "Seo Analyst",
+        "Software Engineer",
+        "UI/UX Designer"
+    ],
+    "tfidf_features": 2897,
+    "best_parameters": {
+        "colsample_bytree": 0.8,
+        "learning_rate": 0.05,
+        "max_depth": 6,
+        "n_estimators": 200,
+        "subsample": 0.8
+    },
+    "training_accuracy": 1.0,
+    "best_cv_accuracy": 0.9949783549783551,
+    "validation": {
+        "top_1_accuracy": 0.9959415584415584,
+        "top_3_accuracy": 1.0,
+        "top_5_accuracy": 1.0,
+        "precision": 0.9960125750733474,
+        "recall": 0.9959415584415584,
+        "f1_score": 0.9959393499999242
+    },
+    "test": {
+        "top_1_accuracy": 0.995172968624296,
+        "top_3_accuracy": 1.0,
+        "top_5_accuracy": 1.0,
+        "precision": 0.9952596115826913,
+        "recall": 0.995172968624296,
+        "f1_score": 0.9951687302724286
+    },
+    "training_time_seconds": 8378.88194179535,
+    "total_execution_time_seconds": 8388.24859714508
+}

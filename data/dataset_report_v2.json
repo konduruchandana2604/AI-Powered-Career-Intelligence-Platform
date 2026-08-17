@@ -1,0 +1,33 @@
+{
+    "dataset_version": "V2",
+    "random_state": 42,
+    "total_records": 16500,
+    "number_of_careers": 22,
+    "train_records": 11550,
+    "validation_records": 2464,
+    "test_records": 2486,
+    "career_distribution": {
+        "AI Researcher": 750,
+        "Backend Developer": 750,
+        "Business Analyst": 750,
+        "Business Manager": 750,
+        "Cybersecurity Analyst": 750,
+        "Data Analyst": 750,
+        "Data Scientist": 750,
+        "Deep Learning Engineer": 750,
+        "Digital Marketing Specialist": 750,
+        "Ethical Hacker": 750,
+        "Frontend Developer": 750,
+        "Full Stack Developer": 750,
+        "Graphic Designer": 750,
+        "Machine Learning Engineer": 750,
+        "Marketing Executive": 750,
+        "Operations Manager": 750,
+        "Product Designer": 750,
+        "Project Manager": 750,
+        "Security Engineer": 750,
+        "Seo Analyst": 750,
+        "Software Engineer": 750,
+        "UI/UX Designer": 750
+    }
+}

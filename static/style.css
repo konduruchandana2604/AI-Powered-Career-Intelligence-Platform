@@ -1,0 +1,706 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    background: #f4f7fb;
+
+    color: #172033;
+
+    min-height: 100vh;
+}
+
+
+.header {
+    background: #ffffff;
+
+    border-bottom: 1px solid #e5eaf2;
+
+    padding: 18px 6%;
+}
+
+
+.logo {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+
+.logo-icon {
+    width: 46px;
+
+    height: 46px;
+
+    border-radius: 12px;
+
+    background: #2563eb;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-weight: 800;
+
+    font-size: 16px;
+}
+
+
+.logo h1 {
+    font-size: 20px;
+
+    margin-bottom: 2px;
+}
+
+
+.logo p {
+    font-size: 13px;
+
+    color: #718096;
+}
+
+
+.container {
+    width: min(1100px, 92%);
+
+    margin: auto;
+
+    padding: 45px 0 70px;
+}
+
+
+.hero {
+    text-align: center;
+
+    margin-bottom: 35px;
+}
+
+
+.hero h2 {
+    font-size: 38px;
+
+    margin-bottom: 12px;
+}
+
+
+.hero p {
+    color: #64748b;
+
+    max-width: 700px;
+
+    margin: auto;
+
+    line-height: 1.7;
+}
+
+
+.card {
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 30px;
+
+    margin-bottom: 25px;
+
+    box-shadow:
+        0 8px 30px rgba(30, 60, 90, 0.07);
+
+    border: 1px solid #e6ebf2;
+}
+
+
+.section-title {
+    display: flex;
+
+    gap: 15px;
+
+    align-items: center;
+
+    margin-bottom: 25px;
+}
+
+
+.step {
+    width: 38px;
+
+    height: 38px;
+
+    min-width: 38px;
+
+    border-radius: 50%;
+
+    background: #2563eb;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-weight: 700;
+}
+
+
+.section-title h3 {
+    font-size: 21px;
+
+    margin-bottom: 5px;
+}
+
+
+.section-title p {
+    color: #718096;
+
+    font-size: 14px;
+}
+
+
+.upload-box {
+    border: 2px dashed #b8d4ff;
+
+    border-radius: 16px;
+
+    padding: 40px;
+
+    text-align: center;
+
+    background: #f8fbff;
+
+    transition: 0.2s;
+}
+
+
+.upload-box.dragover {
+    background: #eef6ff;
+
+    border-color: #2563eb;
+}
+
+
+.upload-icon {
+    font-size: 40px;
+
+    margin-bottom: 10px;
+}
+
+
+.upload-box h4 {
+    font-size: 19px;
+
+    margin-bottom: 7px;
+}
+
+
+.upload-box p {
+    color: #718096;
+
+    margin-bottom: 20px;
+}
+
+
+.secondary-button {
+    border: 1px solid #2563eb;
+
+    background: white;
+
+    color: #2563eb;
+
+    padding: 12px 24px;
+
+    border-radius: 9px;
+
+    cursor: pointer;
+
+    font-weight: 600;
+}
+
+
+.secondary-button:hover {
+    background: #eff6ff;
+}
+
+
+.selected-file {
+    margin-top: 18px;
+
+    color: #16a34a;
+
+    font-weight: 600;
+}
+
+
+.or {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin: 30px 0;
+
+    color: #64748b;
+}
+
+
+.or::before,
+.or::after {
+    content: "";
+
+    height: 1px;
+
+    background: #e2e8f0;
+
+    flex: 1;
+}
+
+
+textarea {
+    width: 100%;
+
+    min-height: 220px;
+
+    resize: vertical;
+
+    border: 1px solid #d9e1ec;
+
+    border-radius: 14px;
+
+    padding: 18px;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    outline: none;
+
+    margin-top: 10px;
+
+    margin-bottom: 20px;
+}
+
+
+textarea:focus {
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+
+.primary-button {
+    width: 100%;
+
+    border: none;
+
+    background: #2563eb;
+
+    color: white;
+
+    padding: 16px;
+
+    border-radius: 10px;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+.primary-button:hover {
+    background: #1d4ed8;
+}
+
+
+.primary-button:disabled {
+    opacity: 0.65;
+
+    cursor: not-allowed;
+}
+
+
+.loader {
+    display: inline-block;
+
+    width: 18px;
+
+    height: 18px;
+
+    border: 3px solid rgba(255,255,255,.4);
+
+    border-top-color: white;
+
+    border-radius: 50%;
+
+    animation: spin 0.7s linear infinite;
+}
+
+
+@keyframes spin {
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+.hidden {
+    display: none !important;
+}
+
+
+.error-box {
+    background: #fff1f2;
+
+    border: 1px solid #fecdd3;
+
+    color: #b91c1c;
+
+    padding: 20px;
+
+    border-radius: 14px;
+
+    margin-bottom: 25px;
+}
+
+
+.error-box h3 {
+    margin-bottom: 7px;
+}
+
+
+.top-career {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    background: #eff6ff;
+
+    border-radius: 15px;
+
+    padding: 25px;
+}
+
+
+.top-career span {
+    color: #64748b;
+
+    font-size: 14px;
+}
+
+
+.top-career h2 {
+    color: #1d4ed8;
+
+    margin-top: 7px;
+
+    font-size: 28px;
+}
+
+
+.confidence {
+    text-align: right;
+}
+
+
+.confidence strong {
+    display: block;
+
+    font-size: 30px;
+
+    color: #16a34a;
+}
+
+
+.career-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 13px;
+}
+
+
+.career-item {
+    border: 1px solid #e2e8f0;
+
+    border-radius: 12px;
+
+    padding: 17px;
+
+    background: #fafcff;
+}
+
+
+.career-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 9px;
+}
+
+
+.career-name {
+    font-weight: 700;
+}
+
+
+.career-score {
+    font-weight: 700;
+
+    color: #2563eb;
+}
+
+
+.career-progress {
+    height: 8px;
+
+    background: #e5e7eb;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+}
+
+
+.career-progress-bar {
+    height: 100%;
+
+    background: #2563eb;
+
+    border-radius: 20px;
+}
+
+
+.skills {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 9px;
+}
+
+
+.skill {
+    padding: 8px 13px;
+
+    background: #eaf2ff;
+
+    color: #1d4ed8;
+
+    border-radius: 20px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+
+.skill.matched {
+    background: #dcfce7;
+
+    color: #15803d;
+}
+
+
+.skill.missing {
+    background: #fff7ed;
+
+    color: #c2410c;
+}
+
+
+.alignment {
+    margin-bottom: 25px;
+}
+
+
+.alignment > div:first-child {
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 10px;
+}
+
+
+.alignment strong {
+    color: #2563eb;
+
+    font-size: 20px;
+}
+
+
+.progress {
+    width: 100%;
+
+    height: 12px;
+
+    background: #e5e7eb;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+}
+
+
+.progress-bar {
+    height: 100%;
+
+    background: #2563eb;
+
+    width: 0%;
+
+    transition: width 0.8s ease;
+}
+
+
+.next-steps {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 15px;
+}
+
+
+.next-steps div {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    border: 1px solid #e5e7eb;
+
+    padding: 17px;
+
+    border-radius: 12px;
+}
+
+
+.next-steps strong {
+    color: #2563eb;
+
+    font-size: 18px;
+}
+
+
+.next-steps span {
+    color: #475569;
+
+    line-height: 1.5;
+}
+
+
+.reset-button {
+    width: 100%;
+
+    padding: 15px;
+
+    background: white;
+
+    border: 1px solid #2563eb;
+
+    color: #2563eb;
+
+    border-radius: 10px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+.reset-button:hover {
+    background: #eff6ff;
+}
+
+
+footer {
+    text-align: center;
+
+    padding: 25px;
+
+    color: #64748b;
+
+    border-top: 1px solid #e2e8f0;
+
+    background: white;
+}
+
+
+@media (max-width: 700px) {
+
+    .hero h2 {
+        font-size: 29px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .upload-box {
+        padding: 25px;
+    }
+
+    .top-career {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 20px;
+    }
+
+    .confidence {
+        text-align: left;
+    }
+
+    .next-steps {
+        grid-template-columns: 1fr;
+    }
+
+}
+/* ============================================================
+   MILESTONE 2 CAREER DETAILS
+   ============================================================ */
+
+.career-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 12px;
+    font-size: 13px;
+}
+
+.career-details span {
+    padding: 5px 9px;
+    border-radius: 6px;
+    background: #f1f5f9;
+    color: #334155;
+}

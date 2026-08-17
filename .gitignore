@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment
+venv/
+.venv/
+env/
+
+# macOS
+.DS_Store
+
+# Environment variables
+.env
+
+# Large ML model
+models/random_forest.pkl
+
+# Uploaded resumes / temporary files
+uploads/
+*.pdf
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Python cache
+.pytest_cache/
+
+# Large/generated datasets
+data/*.csv
+career_dataset.csv
+
+# Large/generated ML embeddings
+models/*_embeddings.pkl
+
+# Large trained model
+models/xgboost.pkl

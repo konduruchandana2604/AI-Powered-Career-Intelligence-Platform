@@ -1,0 +1,42 @@
+[
+    {
+        "rank": 1,
+        "career": "Deep Learning Engineer",
+        "hybrid_score": 75.0,
+        "random_forest_confidence": 67.04,
+        "xgboost_confidence": 91.88,
+        "skill_alignment": 64.57
+    },
+    {
+        "rank": 2,
+        "career": "Machine Learning Engineer",
+        "hybrid_score": 36.0,
+        "random_forest_confidence": 15.94,
+        "xgboost_confidence": 1.21,
+        "skill_alignment": 100.0
+    },
+    {
+        "rank": 3,
+        "career": "AI Researcher",
+        "hybrid_score": 26.14,
+        "random_forest_confidence": 7.35,
+        "xgboost_confidence": 0.67,
+        "skill_alignment": 77.77
+    },
+    {
+        "rank": 4,
+        "career": "Software Engineer",
+        "hybrid_score": 19.9,
+        "random_forest_confidence": 7.0,
+        "xgboost_confidence": 4.36,
+        "skill_alignment": 53.08
+    },
+    {
+        "rank": 5,
+        "career": "Data Scientist",
+        "hybrid_score": 17.29,
+        "random_forest_confidence": 1.0,
+        "xgboost_confidence": 0.28,
+        "skill_alignment": 56.14
+    }
+]
