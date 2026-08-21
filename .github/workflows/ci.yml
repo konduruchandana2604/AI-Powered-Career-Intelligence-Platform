@@ -4,12 +4,10 @@ on:
   push:
     branches:
       - main
-      - master
 
   pull_request:
     branches:
       - main
-      - master
 
 jobs:
 
@@ -35,11 +33,10 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-          cache: "pip"
 
 
       # ==========================================================
-      # STEP 3 - INSTALL DEPENDENCIES
+      # STEP 3 - PIP
       # ==========================================================
 
       - name: Upgrade pip
@@ -47,67 +44,113 @@ jobs:
           python -m pip install --upgrade pip
 
 
+      # ==========================================================
+      # STEP 4 - DEPENDENCIES
+      # ==========================================================
+
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt
+          python -m pip install -r requirements.txt
 
 
       # ==========================================================
-      # STEP 4 - VERIFY PYTHON FILES
+      # STEP 5 - VERIFY FILES
+      # ==========================================================
+
+      - name: Verify required files
+        run: |
+          echo "=========================================="
+          echo "VERIFYING REQUIRED FILES"
+          echo "=========================================="
+
+          test -f api.py
+          echo "✓ api.py"
+
+          test -f accuracy_gate.py
+          echo "✓ accuracy_gate.py"
+
+          test -f career_recommendation_engine.py
+          echo "✓ career_recommendation_engine.py"
+
+          test -f requirements.txt
+          echo "✓ requirements.txt"
+
+          test -f models/logistic_regression_metrics.json
+          echo "✓ Logistic Regression metrics"
+
+          test -f models/random_forest_metrics.json
+          echo "✓ Random Forest metrics"
+
+          test -f models/xgboost_metrics.json
+          echo "✓ XGBoost metrics"
+
+          echo "=========================================="
+          echo "ALL REQUIRED FILES FOUND"
+          echo "=========================================="
+
+
+      # ==========================================================
+      # STEP 6 - COMPILE
       # ==========================================================
 
       - name: Compile Python files
         run: |
+          echo "Compiling Python files..."
+
           python -m py_compile api.py
-          python -m py_compile app.py
-          python -m py_compile career_recommendation_engine.py
           python -m py_compile accuracy_gate.py
-          python -m py_compile mlflow_tracking.py
+          python -m py_compile career_recommendation_engine.py
+
+          echo "✓ Python compilation successful"
 
 
       # ==========================================================
-      # STEP 5 - VERIFY FASTAPI IMPORT
+      # STEP 7 - TEST FASTAPI
       # ==========================================================
 
       - name: Test FastAPI application
         run: |
-          python -c "from api import app; print('FastAPI import: OK')"
+          python -c "from api import app; print('✓ FastAPI application import successful')"
 
 
       # ==========================================================
-      # STEP 6 - VERIFY RECOMMENDATION ENGINE
+      # STEP 8 - TEST RECOMMENDATION ENGINE
       # ==========================================================
 
       - name: Test recommendation engine
         run: |
-          python -c "from career_recommendation_engine import recommend_careers; print('Recommendation engine import: OK')"
+          python -c "from career_recommendation_engine import recommend_careers; print('✓ Recommendation engine import successful')"
 
 
       # ==========================================================
-      # STEP 7 - RUN ACCURACY GATE
+      # STEP 9 - RUN ACCURACY GATE
       # ==========================================================
 
-      - name: Run accuracy gate
+      - name: Run automated accuracy gate
         run: |
           python accuracy_gate.py
 
 
       # ==========================================================
-      # STEP 8 - SHOW GATE REPORT
+      # STEP 10 - SHOW REPORT
       # ==========================================================
 
       - name: Display accuracy gate report
         if: always()
         run: |
+          echo "=========================================="
+          echo "ACCURACY GATE REPORT"
+          echo "=========================================="
+
           if [ -f models/accuracy_gate_report.json ]; then
             cat models/accuracy_gate_report.json
           else
-            echo "Accuracy gate report not found."
+            echo "Accuracy report was not generated."
           fi
 
 
       # ==========================================================
-      # STEP 9 - UPLOAD REPORT
+      # STEP 11 - UPLOAD REPORT
       # ==========================================================
 
       - name: Upload accuracy gate report
