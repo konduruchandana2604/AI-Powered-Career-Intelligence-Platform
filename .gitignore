@@ -36,5 +36,3 @@ models/*_embeddings.pkl
 
 # Large trained model
 models/xgboost.pkl
-
-mlruns/models/accuracy_gate_report.json

@@ -1,0 +1,3 @@
+"""
+CareerCast FastAPI package.
+"""
