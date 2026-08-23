@@ -1,0 +1,24 @@
+{
+    "gate": {
+        "status": "PASS",
+        "minimum_accuracy": 0.9,
+        "actual_accuracy": 0.999195494770716,
+        "passed": true
+    },
+    "metrics": {
+        "accuracy": 0.999195494770716,
+        "precision": 0.9992025518341306,
+        "recall": 0.999195494770716,
+        "f1_score": 0.9991954790192676
+    },
+    "dataset": {
+        "test_samples": 2486,
+        "feature_count": 2950
+    },
+    "model": {
+        "name": "Random Forest",
+        "model_path": "/Users/konduruchandana/Desktop/CareerCast Project/models/random_forest.pkl",
+        "tfidf_path": "/Users/konduruchandana/Desktop/CareerCast Project/models/random_forest_tfidf.pkl",
+        "label_encoder_path": "/Users/konduruchandana/Desktop/CareerCast Project/models/random_forest_label_encoder.pkl"
+    }
+}
