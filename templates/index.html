@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
 
     <meta
@@ -11,584 +9,1834 @@
     >
 
     <title>
-        CareerCast | AI Career Intelligence
+        AI Powered Career Intelligence Platform
     </title>
+
+    <meta
+        name="description"
+        content="AI-powered career prediction and skill gap analysis platform"
+    >
 
     <link
         rel="stylesheet"
         href="{{ url_for('static', filename='style.css') }}"
     >
 
+    <script
+        src="https://cdn.jsdelivr.net/npm/chart.js"
+    ></script>
 </head>
-
 
 <body>
 
+<!-- =========================================================
+     LOGIN SCREEN
+========================================================= -->
 
-<header class="header">
+<div
+    id="loginScreen"
+    class="login-screen"
+>
 
-    <div class="logo">
+    <div class="login-background-shape shape-one"></div>
+    <div class="login-background-shape shape-two"></div>
 
-        <div class="logo-icon">
-            CC
-        </div>
+    <div class="login-container">
 
-        <div>
+        <div class="login-brand">
+
+            <div class="brand-mark large">
+                <span>AI</span>
+            </div>
 
             <h1>
-                CareerCast
+                AI Powered Career
+                <span>Intelligence Platform</span>
             </h1>
 
             <p>
-                AI Career Intelligence
+                Discover the career that matches your skills.
             </p>
+
+        </div>
+
+        <div class="login-card">
+
+            <div class="login-card-header">
+
+                <h2>
+                    Welcome Back
+                </h2>
+
+                <p>
+                    Sign in to continue your career analysis.
+                </p>
+
+            </div>
+
+            <form id="loginForm">
+
+                <div class="form-group">
+
+                    <label for="loginEmail">
+                        Email / Username
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">
+                            ✉
+                        </span>
+
+                        <input
+                            id="loginEmail"
+                            type="email"
+                            placeholder="demo@example.com"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="loginPassword">
+                        Password
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">
+                            ●
+                        </span>
+
+                        <input
+                            id="loginPassword"
+                            type="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            id="togglePassword"
+                            class="password-toggle"
+                            aria-label="Show password"
+                        >
+                            Show
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <div class="login-options">
+
+                    <label class="checkbox-label">
+
+                        <input
+                            type="checkbox"
+                            id="rememberMe"
+                        >
+
+                        <span>
+                            Remember me
+                        </span>
+
+                    </label>
+
+                    <span class="demo-hint">
+                        Demo account available
+                    </span>
+
+                </div>
+
+                <button
+                    type="submit"
+                    id="loginButton"
+                    class="btn btn-primary btn-full"
+                >
+                    Sign In
+                </button>
+
+            </form>
+
+            <div class="demo-login-box">
+
+                <span>
+                    Demo credentials
+                </span>
+
+                <strong>
+                    demo@example.com
+                </strong>
+
+                <strong>
+                    demo123
+                </strong>
+
+                <button
+                    type="button"
+                    id="fillDemoButton"
+                    class="btn btn-secondary btn-small"
+                >
+                    Use Demo Account
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+<!-- =========================================================
+     MAIN APPLICATION
+========================================================= -->
+
+<div
+    id="appShell"
+    class="app-shell hidden"
+>
+
+    <!-- SIDEBAR -->
+
+    <aside
+        id="sidebar"
+        class="sidebar"
+    >
+
+        <div class="sidebar-brand">
+
+            <div class="brand-mark">
+                <span>AI</span>
+            </div>
+
+            <div class="brand-text">
+
+                <strong>
+                    Career
+                </strong>
+
+                <span>
+                    Intelligence
+                </span>
+
+            </div>
+
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <button
+                class="nav-item active"
+                data-section="dashboardSection"
+            >
+                <span class="nav-icon">⌂</span>
+                <span>Dashboard</span>
+            </button>
+
+            <button
+                class="nav-item"
+                data-section="analyzeSection"
+            >
+                <span class="nav-icon">⌕</span>
+                <span>Analyze Resume</span>
+            </button>
+
+            <button
+                class="nav-item"
+                data-section="predictionsSection"
+            >
+                <span class="nav-icon">◆</span>
+                <span>Career Predictions</span>
+            </button>
+
+            <button
+                class="nav-item"
+                data-section="skillGapSection"
+            >
+                <span class="nav-icon">◈</span>
+                <span>Skill Gap</span>
+            </button>
+
+            <button
+                class="nav-item"
+                data-section="analyticsSection"
+            >
+                <span class="nav-icon">▥</span>
+                <span>Analytics</span>
+            </button>
+
+            <button
+                class="nav-item"
+                data-section="profileSection"
+            >
+                <span class="nav-icon">●</span>
+                <span>Profile</span>
+            </button>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <div class="sidebar-status">
+
+                <span class="status-dot"></span>
+
+                <div>
+                    <strong>
+                        AI Engine
+                    </strong>
+
+                    <small>
+                        Ready
+                    </small>
+                </div>
+
+            </div>
+
+            <button
+                id="logoutButton"
+                class="logout-button"
+            >
+                <span>↪</span>
+                Logout
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="main-content">
+
+        <!-- TOP HEADER -->
+
+        <header class="top-header">
+
+            <button
+                id="mobileMenuButton"
+                class="mobile-menu-button"
+                aria-label="Open navigation"
+            >
+                ☰
+            </button>
+
+            <div class="header-title">
+
+                <span id="headerEyebrow">
+                    Career Intelligence
+                </span>
+
+                <h1 id="headerTitle">
+                    Dashboard
+                </h1>
+
+            </div>
+
+            <div class="header-actions">
+
+                <div class="header-ai-status">
+                    <span class="status-dot"></span>
+                    AI Models Ready
+                </div>
+
+                <div class="user-menu">
+
+                    <div class="avatar">
+                        DU
+                    </div>
+
+                    <div class="user-info">
+
+                        <strong id="headerUserName">
+                            Demo User
+                        </strong>
+
+                        <span id="headerUserEmail">
+                            demo@example.com
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- CONTENT AREA -->
+
+        <div class="content-area">
+
+
+            <!-- =================================================
+                 DASHBOARD
+            ================================================= -->
+
+            <section
+                id="dashboardSection"
+                class="page-section active-section"
+            >
+
+                <div class="welcome-row">
+
+                    <div>
+
+                        <span class="section-eyebrow">
+                            AI CAREER INTELLIGENCE
+                        </span>
+
+                        <h2>
+                            Welcome back,
+                            <span id="welcomeName">
+                                Demo User
+                            </span>
+                        </h2>
+
+                        <p>
+                            Analyze your profile and discover
+                            the career path that best matches
+                            your current skills.
+                        </p>
+
+                    </div>
+
+                    <button
+                        class="btn btn-primary"
+                        data-section="analyzeSection"
+                    >
+                        Analyze My Resume
+                    </button>
+
+                </div>
+
+
+                <!-- SUMMARY CARDS -->
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+
+                        <div class="stat-card-icon purple">
+                            ◆
+                        </div>
+
+                        <div class="stat-card-content">
+
+                            <span>
+                                Top Career
+                            </span>
+
+                            <strong
+                                id="dashboardTopCareer"
+                            >
+                                —
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                    <div class="stat-card">
+
+                        <div class="stat-card-icon blue">
+                            %
+                        </div>
+
+                        <div class="stat-card-content">
+
+                            <span>
+                                Career Confidence
+                            </span>
+
+                            <strong
+                                id="dashboardConfidence"
+                            >
+                                —
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                    <div class="stat-card">
+
+                        <div class="stat-card-icon green">
+                            ✓
+                        </div>
+
+                        <div class="stat-card-content">
+
+                            <span>
+                                Skills Matched
+                            </span>
+
+                            <strong
+                                id="dashboardMatched"
+                            >
+                                0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                    <div class="stat-card">
+
+                        <div class="stat-card-icon orange">
+                            !
+                        </div>
+
+                        <div class="stat-card-content">
+
+                            <span>
+                                Skills Missing
+                            </span>
+
+                            <strong
+                                id="dashboardMissing"
+                            >
+                                0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TOP CAREER -->
+
+                <div class="top-career-card">
+
+                    <div class="top-career-content">
+
+                        <span class="section-eyebrow">
+                            YOUR BEST MATCH
+                        </span>
+
+                        <h2
+                            id="topCareerName"
+                        >
+                            No analysis yet
+                        </h2>
+
+                        <p
+                            id="topCareerDescription"
+                        >
+                            Analyze your resume to generate
+                            your personalized career recommendation.
+                        </p>
+
+                        <div class="top-career-metrics">
+
+                            <div class="metric-block">
+
+                                <span>
+                                    Confidence
+                                </span>
+
+                                <strong
+                                    id="topCareerConfidence"
+                                >
+                                    —
+                                </strong>
+
+                            </div>
+
+                            <div class="metric-block">
+
+                                <span>
+                                    Skill Match
+                                </span>
+
+                                <strong
+                                    id="topCareerMatch"
+                                >
+                                    —
+                                </strong>
+
+                            </div>
+
+                            <div class="metric-block">
+
+                                <span>
+                                    Skill Gap
+                                </span>
+
+                                <strong
+                                    id="topCareerGap"
+                                >
+                                    —
+                                </strong>
+
+                            </div>
+
+                            <div class="metric-block">
+
+                                <span>
+                                    Readiness
+                                </span>
+
+                                <strong
+                                    id="topCareerReadiness"
+                                >
+                                    —
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="readiness-circle">
+
+                        <div class="readiness-inner">
+
+                            <strong
+                                id="readinessValue"
+                            >
+                                —
+                            </strong>
+
+                            <span>
+                                Readiness
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DASHBOARD LOWER GRID -->
+
+                <div class="dashboard-grid">
+
+                    <div class="panel">
+
+                        <div class="panel-header">
+
+                            <div>
+
+                                <span class="section-eyebrow">
+                                    CAREER RANKING
+                                </span>
+
+                                <h3>
+                                    Top 5 Career Predictions
+                                </h3>
+
+                            </div>
+
+                            <button
+                                class="text-button"
+                                data-section="predictionsSection"
+                            >
+                                View All
+                            </button>
+
+                        </div>
+
+                        <div
+                            id="dashboardPredictions"
+                            class="mini-predictions"
+                        >
+
+                            <div class="empty-state compact">
+                                <span>◆</span>
+                                <p>
+                                    Analyze your profile to
+                                    see career predictions.
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="panel">
+
+                        <div class="panel-header">
+
+                            <div>
+
+                                <span class="section-eyebrow">
+                                    SKILL INTELLIGENCE
+                                </span>
+
+                                <h3>
+                                    Skill Overview
+                                </h3>
+
+                            </div>
+
+                            <button
+                                class="text-button"
+                                data-section="skillGapSection"
+                            >
+                                Details
+                            </button>
+
+                        </div>
+
+                        <div class="skill-overview">
+
+                            <div class="skill-progress-row">
+
+                                <div class="skill-progress-title">
+
+                                    <span>
+                                        Matched Skills
+                                    </span>
+
+                                    <strong
+                                        id="dashboardMatchPercent"
+                                    >
+                                        0%
+                                    </strong>
+
+                                </div>
+
+                                <div class="progress-track">
+
+                                    <div
+                                        id="dashboardMatchBar"
+                                        class="progress-fill green-fill"
+                                        style="width: 0%"
+                                    ></div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="skill-progress-row">
+
+                                <div class="skill-progress-title">
+
+                                    <span>
+                                        Skill Gap
+                                    </span>
+
+                                    <strong
+                                        id="dashboardGapPercent"
+                                    >
+                                        0%
+                                    </strong>
+
+                                </div>
+
+                                <div class="progress-track">
+
+                                    <div
+                                        id="dashboardGapBar"
+                                        class="progress-fill orange-fill"
+                                        style="width: 0%"
+                                    ></div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div
+                            id="dashboardSkillChips"
+                            class="skill-chip-list"
+                        >
+                            <span class="muted-text">
+                                No skills detected yet.
+                            </span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RECENT ANALYSIS -->
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <span class="section-eyebrow">
+                                HISTORY
+                            </span>
+
+                            <h3>
+                                Recent Analysis
+                            </h3>
+
+                        </div>
+
+                        <button
+                            id="clearHistoryButton"
+                            class="text-button danger-text"
+                        >
+                            Clear History
+                        </button>
+
+                    </div>
+
+                    <div class="table-wrapper">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Top Career</th>
+                                    <th>Confidence</th>
+                                    <th>Skill Match</th>
+                                    <th>Action</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody
+                                id="historyTableBody"
+                            >
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 ANALYZE RESUME
+            ================================================= -->
+
+            <section
+                id="analyzeSection"
+                class="page-section"
+            >
+
+                <div class="page-heading">
+
+                    <div>
+
+                        <span class="section-eyebrow">
+                            PROFILE ANALYSIS
+                        </span>
+
+                        <h2>
+                            Analyze Your Resume
+                        </h2>
+
+                        <p>
+                            Upload your resume or paste your
+                            skills and experience below.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="analysis-layout">
+
+                    <div class="panel analysis-input-panel">
+
+                        <div class="panel-header">
+
+                            <div>
+
+                                <span class="section-eyebrow">
+                                    STEP 01
+                                </span>
+
+                                <h3>
+                                    Upload Resume
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+                        <div
+                            id="dropZone"
+                            class="drop-zone"
+                        >
+
+                            <div class="upload-icon">
+                                ↑
+                            </div>
+
+                            <h3>
+                                Drag & Drop Resume Here
+                            </h3>
+
+                            <p>
+                                or browse files from your computer
+                            </p>
+
+                            <span class="file-support">
+                                PDF, DOCX or TXT · Maximum 10 MB
+                            </span>
+
+                            <button
+                                type="button"
+                                id="browseButton"
+                                class="btn btn-secondary"
+                            >
+                                Browse Files
+                            </button>
+
+                            <input
+                                type="file"
+                                id="resumeFile"
+                                accept=".pdf,.docx,.txt"
+                                hidden
+                            >
+
+                        </div>
+
+                        <div
+                            id="filePreview"
+                            class="file-preview hidden"
+                        >
+
+                            <div class="file-icon">
+                                FILE
+                            </div>
+
+                            <div class="file-info">
+
+                                <strong
+                                    id="fileName"
+                                >
+                                    —
+                                </strong>
+
+                                <span
+                                    id="fileMeta"
+                                >
+                                    —
+                                </span>
+
+                            </div>
+
+                            <button
+                                type="button"
+                                id="removeFileButton"
+                                class="remove-file"
+                                aria-label="Remove file"
+                            >
+                                ×
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="panel analysis-input-panel">
+
+                        <div class="panel-header">
+
+                            <div>
+
+                                <span class="section-eyebrow">
+                                    STEP 02
+                                </span>
+
+                                <h3>
+                                    Paste Resume / Skills
+                                </h3>
+
+                            </div>
+
+                            <span class="optional-badge">
+                                Alternative
+                            </span>
+
+                        </div>
+
+                        <textarea
+                            id="resumeText"
+                            class="resume-textarea"
+                            placeholder="Paste your resume, skills, education, certifications, projects and experience here...
+
+Example:
+Python
+SQL
+Machine Learning
+Pandas
+NumPy
+Scikit-learn
+TensorFlow
+Data Visualization
+Statistics
+HTML
+CSS
+JavaScript"
+                        ></textarea>
+
+                        <div class="textarea-footer">
+
+                            <span
+                                id="characterCount"
+                            >
+                                0 characters
+                            </span>
+
+                            <span>
+                                Your information is processed locally by the Flask backend.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="analysis-action">
+
+                    <div>
+
+                        <strong>
+                            Ready to discover your career?
+                        </strong>
+
+                        <span>
+                            The AI engine will compare your profile
+                            using three trained ML models.
+                        </span>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        id="analyzeButton"
+                        class="btn btn-primary btn-large"
+                    >
+                        Analyze Resume
+                        <span>→</span>
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="analysisError"
+                    class="alert alert-error hidden"
+                ></div>
+
+            </section>
+
+
+            <!-- =================================================
+                 CAREER PREDICTIONS
+            ================================================= -->
+
+            <section
+                id="predictionsSection"
+                class="page-section"
+            >
+
+                <div class="page-heading">
+
+                    <div>
+
+                        <span class="section-eyebrow">
+                            AI PREDICTION ENGINE
+                        </span>
+
+                        <h2>
+                            Career Predictions
+                        </h2>
+
+                        <p>
+                            Your highest-ranked career opportunities
+                            based on the available ML models.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div
+                    id="predictionsGrid"
+                    class="career-grid"
+                >
+
+                    <div class="empty-state full-width">
+                        <div class="empty-icon">
+                            ◆
+                        </div>
+                        <h3>
+                            No predictions yet
+                        </h3>
+                        <p>
+                            Analyze your resume to generate
+                            your Top 5 career predictions.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="detail-layout">
+
+                    <div
+                        id="careerDetailPanel"
+                        class="panel career-detail-panel"
+                    >
+
+                        <div class="empty-state">
+
+                            <div class="empty-icon">
+                                ◈
+                            </div>
+
+                            <h3>
+                                Select a Career
+                            </h3>
+
+                            <p>
+                                Click "View Details" on any prediction
+                                to inspect the career-specific skill gap.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="panel">
+
+                        <div class="panel-header">
+
+                            <div>
+
+                                <span class="section-eyebrow">
+                                    MACHINE LEARNING
+                                </span>
+
+                                <h3>
+                                    Model Comparison
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+                        <div
+                            id="modelComparisonList"
+                            class="model-list"
+                        >
+
+                            <div class="empty-state compact">
+                                <p>
+                                    Model results will appear
+                                    after analysis.
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <div class="chart-container small-chart">
+                            <canvas id="modelComparisonChart"></canvas>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 SKILL GAP
+            ================================================= -->
+
+            <section
+                id="skillGapSection"
+                class="page-section"
+            >
+
+                <div class="page-heading">
+
+                    <div>
+
+                        <span class="section-eyebrow">
+                            COMPETENCY INTELLIGENCE
+                        </span>
+
+                        <h2>
+                            Skill Gap Analysis
+                        </h2>
+
+                        <p>
+                            Understand what you already know and
+                            what to learn next.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="skill-gap-summary">
+
+                    <div class="gap-score-card">
+
+                        <div class="score-circle">
+
+                            <div>
+
+                                <strong
+                                    id="skillGapReadiness"
+                                >
+                                    —
+                                </strong>
+
+                                <span>
+                                    / 100
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <div>
+
+                            <span class="section-eyebrow">
+                                CAREER READINESS
+                            </span>
+
+                            <h3
+                                id="skillGapCareer"
+                            >
+                                —
+                            </h3>
+
+                            <p>
+                                Your readiness score is calculated
+                                from your matched required skills.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="gap-stat">
+
+                        <span>
+                            Overall Skill Match
+                        </span>
+
+                        <strong
+                            id="overallSkillMatch"
+                        >
+                            —
+                        </strong>
+
+                        <div class="progress-track">
+                            <div
+                                id="overallSkillMatchBar"
+                                class="progress-fill green-fill"
+                                style="width: 0%"
+                            ></div>
+                        </div>
+
+                    </div>
+
+                    <div class="gap-stat">
+
+                        <span>
+                            Overall Skill Gap
+                        </span>
+
+                        <strong
+                            id="overallSkillGap"
+                        >
+                            —
+                        </strong>
+
+                        <div class="progress-track">
+                            <div
+                                id="overallSkillGapBar"
+                                class="progress-fill orange-fill"
+                                style="width: 0%"
+                            ></div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="skill-columns">
+
+                    <div class="panel">
+
+                        <div class="panel-header">
+
+                            <div>
+
+                                <span class="section-eyebrow green-text">
+                                    MATCHED
+                                </span>
+
+                                <h3>
+                                    Skills You Have
+                                </h3>
+
+                            </div>
+
+                            <span
+                                id="matchedSkillCount"
+                                class="count-badge green-badge"
+                            >
+                                0
+                            </span>
+
+                        </div>
+
+                        <div
+                            id="matchedSkills"
+                            class="skill-badge-container"
+                        >
+                            <span class="muted-text">
+                                No matched skills yet.
+                            </span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="panel">
+
+                        <div class="panel-header">
+
+                            <div>
+
+                                <span class="section-eyebrow orange-text">
+                                    DEVELOPMENT
+                                </span>
+
+                                <h3>
+                                    Skills to Develop
+                                </h3>
+
+                            </div>
+
+                            <span
+                                id="missingSkillCount"
+                                class="count-badge orange-badge"
+                            >
+                                0
+                            </span>
+
+                        </div>
+
+                        <div
+                            id="missingSkills"
+                            class="skill-badge-container"
+                        >
+                            <span class="muted-text">
+                                No missing skills yet.
+                            </span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PRIORITY -->
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <span class="section-eyebrow">
+                                LEARNING ROADMAP
+                            </span>
+
+                            <h3>
+                                Skill Gap Priority
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+                    <div class="priority-grid">
+
+                        <div class="priority-card high">
+
+                            <div class="priority-heading">
+                                <span class="priority-dot"></span>
+                                <strong>High Priority</strong>
+                            </div>
+
+                            <div
+                                id="highPrioritySkills"
+                                class="priority-list"
+                            >
+                                <span class="muted-text">
+                                    —
+                                </span>
+                            </div>
+
+                        </div>
+
+                        <div class="priority-card medium">
+
+                            <div class="priority-heading">
+                                <span class="priority-dot"></span>
+                                <strong>Medium Priority</strong>
+                            </div>
+
+                            <div
+                                id="mediumPrioritySkills"
+                                class="priority-list"
+                            >
+                                <span class="muted-text">
+                                    —
+                                </span>
+                            </div>
+
+                        </div>
+
+                        <div class="priority-card low">
+
+                            <div class="priority-heading">
+                                <span class="priority-dot"></span>
+                                <strong>Low Priority</strong>
+                            </div>
+
+                            <div
+                                id="lowPrioritySkills"
+                                class="priority-list"
+                            >
+                                <span class="muted-text">
+                                    —
+                                </span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RECOMMENDATIONS -->
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <span class="section-eyebrow">
+                                ACTION PLAN
+                            </span>
+
+                            <h3>
+                                Learning Recommendations
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+                    <div
+                        id="recommendationsList"
+                        class="recommendation-list"
+                    >
+
+                        <div class="empty-state compact">
+                            <p>
+                                Recommendations will appear after
+                                your skill-gap analysis.
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 ANALYTICS
+            ================================================= -->
+
+            <section
+                id="analyticsSection"
+                class="page-section"
+            >
+
+                <div class="page-heading">
+
+                    <div>
+
+                        <span class="section-eyebrow">
+                            DATA VISUALIZATION
+                        </span>
+
+                        <h2>
+                            Career Analytics
+                        </h2>
+
+                        <p>
+                            Visualize your career probabilities,
+                            skills and model behavior.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="analytics-grid">
+
+                    <div class="panel chart-panel wide">
+
+                        <div class="panel-header">
+
+                            <div>
+
+                                <span class="section-eyebrow">
+                                    CAREER PROBABILITY
+                                </span>
+
+                                <h3>
+                                    Top 5 Career Probability
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+                        <div class="chart-container">
+                            <canvas id="careerProbabilityChart"></canvas>
+                        </div>
+
+                    </div>
+
+
+                    <div class="panel chart-panel">
+
+                        <div class="panel-header">
+
+                            <div>
+
+                                <span class="section-eyebrow">
+                                    SKILLS
+                                </span>
+
+                                <h3>
+                                    Matched vs Missing
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+                        <div class="chart-container doughnut-chart">
+                            <canvas id="skillMatchChart"></canvas>
+                        </div>
+
+                    </div>
+
+
+                    <div class="panel chart-panel">
+
+                        <div class="panel-header">
+
+                            <div>
+
+                                <span class="section-eyebrow">
+                                    SKILL GAP
+                                </span>
+
+                                <h3>
+                                    Skill Gap Distribution
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+                        <div class="chart-container doughnut-chart">
+                            <canvas id="skillGapChart"></canvas>
+                        </div>
+
+                    </div>
+
+
+                    <div class="panel chart-panel wide">
+
+                        <div class="panel-header">
+
+                            <div>
+
+                                <span class="section-eyebrow">
+                                    ML ENGINE
+                                </span>
+
+                                <h3>
+                                    Model Confidence Comparison
+                                </h3>
+
+                            </div>
+
+                        </div>
+
+                        <div class="chart-container">
+                            <canvas id="analyticsModelChart"></canvas>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 PROFILE
+            ================================================= -->
+
+            <section
+                id="profileSection"
+                class="page-section"
+            >
+
+                <div class="page-heading">
+
+                    <div>
+
+                        <span class="section-eyebrow">
+                            USER PROFILE
+                        </span>
+
+                        <h2>
+                            Profile
+                        </h2>
+
+                        <p>
+                            Your platform activity and latest
+                            career intelligence.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="profile-grid">
+
+                    <div class="panel profile-card">
+
+                        <div class="profile-avatar">
+                            DU
+                        </div>
+
+                        <h2 id="profileName">
+                            Demo User
+                        </h2>
+
+                        <p id="profileEmail">
+                            demo@example.com
+                        </p>
+
+                        <span class="profile-role">
+                            Career Intelligence User
+                        </span>
+
+                    </div>
+
+
+                    <div class="profile-info-grid">
+
+                        <div class="panel profile-stat">
+
+                            <span>
+                                Total Analyses
+                            </span>
+
+                            <strong
+                                id="profileAnalysisCount"
+                            >
+                                0
+                            </strong>
+
+                        </div>
+
+                        <div class="panel profile-stat">
+
+                            <span>
+                                Latest Career
+                            </span>
+
+                            <strong
+                                id="profileLatestCareer"
+                            >
+                                —
+                            </strong>
+
+                        </div>
+
+                        <div class="panel profile-stat">
+
+                            <span>
+                                Latest Skill Match
+                            </span>
+
+                            <strong
+                                id="profileLatestMatch"
+                            >
+                                —
+                            </strong>
+
+                        </div>
+
+                        <div class="panel profile-stat">
+
+                            <span>
+                                Latest Analysis
+                            </span>
+
+                            <strong
+                                id="profileLatestDate"
+                            >
+                                —
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <span class="section-eyebrow">
+                                SYSTEM
+                            </span>
+
+                            <h3>
+                                ML Model Status
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+                    <div
+                        id="profileModelStatus"
+                        class="system-status-grid"
+                    >
+                        <div class="empty-state compact">
+                            <p>
+                                Checking model status...
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- =========================================================
+     LOADING OVERLAY
+========================================================= -->
+
+<div
+    id="loadingOverlay"
+    class="loading-overlay hidden"
+>
+
+    <div class="loading-card">
+
+        <div class="loader"></div>
+
+        <h3>
+            Analyzing your career profile...
+        </h3>
+
+        <p>
+            Running Logistic Regression, Random Forest
+            and XGBoost predictions.
+        </p>
+
+        <div class="loading-steps">
+
+            <span>
+                <i></i>
+                Extracting skills
+            </span>
+
+            <span>
+                <i></i>
+                Running ML models
+            </span>
+
+            <span>
+                <i></i>
+                Calculating skill gap
+            </span>
 
         </div>
 
     </div>
 
-</header>
+</div>
 
 
-<main class="container">
+<!-- =========================================================
+     TOAST CONTAINER
+========================================================= -->
 
-
-    <!-- ================================================= -->
-    <!-- HERO -->
-    <!-- ================================================= -->
-
-    <section class="hero">
-
-        <h2>
-            AI-Powered Career Prediction
-        </h2>
-
-        <p>
-            Upload your resume or paste your resume text
-            to discover the careers that best match
-            your skills.
-        </p>
-
-    </section>
-
-
-    <!-- ================================================= -->
-    <!-- RESUME INPUT -->
-    <!-- ================================================= -->
-
-    <section class="card">
-
-        <div class="section-title">
-
-            <span class="step">
-                1
-            </span>
-
-            <div>
-
-                <h3>
-                    Upload or Paste Your Resume
-                </h3>
-
-                <p>
-                    Supported formats: PDF, DOCX and TXT
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <form
-            id="resumeForm"
-            enctype="multipart/form-data"
-        >
-
-
-            <!-- FILE UPLOAD -->
-
-            <div
-                class="upload-box"
-                id="uploadBox"
-            >
-
-                <div class="upload-icon">
-                    📄
-                </div>
-
-                <h4>
-                    Upload Resume
-                </h4>
-
-                <p>
-                    Drag and drop your resume here
-                    or click to browse
-                </p>
-
-
-                <input
-                    type="file"
-                    id="resume"
-                    name="resume"
-                    accept=".pdf,.docx,.txt"
-                    hidden
-                >
-
-
-                <button
-                    type="button"
-                    id="chooseFile"
-                    class="secondary-button"
-                >
-                    Choose Resume
-                </button>
-
-
-                <div
-                    id="selectedFile"
-                    class="selected-file"
-                ></div>
-
-            </div>
-
-
-            <div class="or">
-
-                <span>
-                    OR
-                </span>
-
-            </div>
-
-
-            <!-- TEXT INPUT -->
-
-            <label for="resume_text">
-
-                Paste Resume Text
-
-            </label>
-
-
-            <textarea
-                id="resume_text"
-                name="resume_text"
-                placeholder="Paste your resume content here...
-
-Example:
-
-B.Tech Computer Science graduate with experience in Python, SQL, Machine Learning, HTML, CSS and JavaScript. Completed projects in data analysis and artificial intelligence. Familiar with Git and TensorFlow."
-            ></textarea>
-
-
-            <!-- ANALYZE BUTTON -->
-
-            <button
-                type="submit"
-                id="analyzeButton"
-                class="primary-button"
-            >
-
-                <span id="buttonText">
-                    Analyze My Career
-                </span>
-
-                <span
-                    id="loader"
-                    class="loader hidden"
-                ></span>
-
-            </button>
-
-
-        </form>
-
-    </section>
-
-
-    <!-- ================================================= -->
-    <!-- ERROR -->
-    <!-- ================================================= -->
-
-    <section
-        id="errorBox"
-        class="error-box hidden"
-    >
-
-        <h3>
-            Analysis Error
-        </h3>
-
-        <p id="errorMessage"></p>
-
-    </section>
-
-
-    <!-- ================================================= -->
-    <!-- RESULTS -->
-    <!-- ================================================= -->
-
-    <section
-        id="results"
-        class="hidden"
-    >
-
-
-        <!-- ================================================= -->
-        <!-- TOP CAREER -->
-        <!-- ================================================= -->
-
-        <div class="card top-career-card">
-
-            <div class="section-title">
-
-                <span class="step">
-                    2
-                </span>
-
-                <div>
-
-                    <h3>
-                        Recommended Career
-                    </h3>
-
-                    <p>
-                        Best career ranked by the Milestone 2
-                        hybrid AI engine
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="top-career">
-
-                <div>
-
-                    <span>
-                        Best Match
-                    </span>
-
-                    <h2 id="topCareer">
-                        -
-                    </h2>
-
-                </div>
-
-
-                <div class="confidence">
-
-                    <strong id="topConfidence">
-                        0%
-                    </strong>
-
-                    <span>
-                        Hybrid Confidence
-                    </span>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- ================================================= -->
-        <!-- TOP 5 -->
-        <!-- ================================================= -->
-
-        <div class="card">
-
-            <div class="section-title">
-
-                <span class="step">
-                    3
-                </span>
-
-                <div>
-
-                    <h3>
-                        Top 5 Career Recommendations
-                    </h3>
-
-                    <p>
-                        Random Forest + XGBoost +
-                        Sentence-BERT hybrid ranking
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div
-                id="careerList"
-                class="career-list"
-            ></div>
-
-        </div>
-
-
-        <!-- ================================================= -->
-        <!-- IDENTIFIED SKILLS -->
-        <!-- ================================================= -->
-
-        <div class="card">
-
-            <div class="section-title">
-
-                <span class="step">
-                    4
-                </span>
-
-                <div>
-
-                    <h3>
-                        Identified Skills
-                    </h3>
-
-                    <p>
-                        Skills detected from your resume
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div
-                id="identifiedSkills"
-                class="skills"
-            ></div>
-
-        </div>
-
-
-        <!-- ================================================= -->
-        <!-- MATCHED SKILLS -->
-        <!-- ================================================= -->
-
-        <div class="card">
-
-            <div class="section-title">
-
-                <span class="step">
-                    5
-                </span>
-
-                <div>
-
-                    <h3>
-                        Matched Skills
-                    </h3>
-
-                    <p>
-                        Skills matching your recommended career
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div
-                id="matchedSkills"
-                class="skills"
-            ></div>
-
-        </div>
-
-
-        <!-- ================================================= -->
-        <!-- SKILL GAP -->
-        <!-- ================================================= -->
-
-        <div class="card">
-
-            <div class="section-title">
-
-                <span class="step">
-                    6
-                </span>
-
-                <div>
-
-                    <h3>
-                        Skill Gap Analysis
-                    </h3>
-
-                    <p>
-                        Skills you can develop for your
-                        recommended career
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="alignment">
-
-                <div>
-
-                    <span>
-                        Skill Alignment
-                    </span>
-
-                    <strong id="alignmentValue">
-                        0%
-                    </strong>
-
-                </div>
-
-
-                <div class="progress">
-
-                    <div
-                        id="alignmentBar"
-                        class="progress-bar"
-                    ></div>
-
-                </div>
-
-            </div>
-
-
-            <h4>
-                Skills to Develop
-            </h4>
-
-
-            <div
-                id="missingSkills"
-                class="skills missing"
-            ></div>
-
-        </div>
-
-
-        <!-- ================================================= -->
-        <!-- NEXT STEPS -->
-        <!-- ================================================= -->
-
-        <div class="card">
-
-            <div class="section-title">
-
-                <span class="step">
-                    7
-                </span>
-
-                <div>
-
-                    <h3>
-                        Recommended Next Steps
-                    </h3>
-
-                    <p>
-                        Improve your career readiness
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="next-steps">
-
-                <div>
-
-                    <strong>
-                        01
-                    </strong>
-
-                    <span>
-                        Learn the missing technical skills.
-                    </span>
-
-                </div>
-
-
-                <div>
-
-                    <strong>
-                        02
-                    </strong>
-
-                    <span>
-                        Build projects using your target
-                        career skills.
-                    </span>
-
-                </div>
-
-
-                <div>
-
-                    <strong>
-                        03
-                    </strong>
-
-                    <span>
-                        Add relevant certifications to
-                        your resume.
-                    </span>
-
-                </div>
-
-
-                <div>
-
-                    <strong>
-                        04
-                    </strong>
-
-                    <span>
-                        Practice interviews for the
-                        recommended career.
-                    </span>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- ================================================= -->
-        <!-- RESET -->
-        <!-- ================================================= -->
-
-        <button
-            id="resetButton"
-            class="reset-button"
-        >
-
-            Analyze Another Resume
-
-        </button>
-
-
-    </section>
-
-
-</main>
-
-
-<footer>
-
-    CareerCast © 2026 |
-    AI-Powered Career Intelligence Platform
-
-</footer>
+<div
+    id="toastContainer"
+    class="toast-container"
+></div>
 
 
 <script
     src="{{ url_for('static', filename='script.js') }}"
 ></script>
 
-
 </body>
-
 </html>
