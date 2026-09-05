@@ -8,35 +8,58 @@ venv/
 .venv/
 env/
 
+# Packaging
+*.egg-info/
+build/
+dist/
+
 # macOS
 .DS_Store
 
-# Environment variables
+# Environment / secrets
 .env
+.env.*
+!.env.example
 
-# Large ML model
-models/random_forest.pkl
-
-# Uploaded resumes / temporary files
+# Uploaded/user-generated files
 uploads/
-*.pdf
+
+# MLflow local files
+mlruns/
+mlflow.db
 
 # Jupyter
 .ipynb_checkpoints/
 
-# Python cache
+# Logs
+*.log
+
+# Test/cache
 .pytest_cache/
+.coverage
+htmlcov/
 
-# Large/generated datasets
-data/*.csv
+# IDE
+.vscode/
+.idea/
+
+# CareerCast project files to ignore
+README.md
 career_dataset.csv
-
-# Large/generated ML embeddings
-models/*_embeddings.pkl
-
-# Large trained model
+careercast/
+data/career_dataset_cleaned.csv
+data/test.csv
+data/train.csv
+data/validation.csv
+models/random_forest.pkl
+models/sentence_bert_career_embeddings.pkl
+models/sentence_bert_test_embeddings.pkl
+models/sentence_bert_train_embeddings.pkl
+models/sentence_bert_validation_embeddings.pkl
 models/xgboost.pkl
 
-# MLflow
-mlruns/
-mlflow.db
+# Additional generated/local files
+api/__pycache__/
+careercast.egg-info/
+skill_gap/__pycache__/
+tests/__pycache__/
